@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:11:02 by lferro            #+#    #+#             */
-/*   Updated: 2023/10/24 18:47:04 by lferro           ###   ########.fr       */
+/*   Updated: 2023/10/25 15:44:18 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	conv_matcher(char c)
 }
 
 // PUT NUMBER
-void	ft_putnbr(long long n)
+void	ft_putnbr_ll(long long n)
 {
 	long long	nbr;
 
@@ -57,7 +57,7 @@ void	ft_putnbr(long long n)
 	{
 		nbr = n % 10;
 		n = n / 10;
-		ft_putnbr(n);
+		ft_putnbr_ll(n);
 		ft_putchar_fd(nbr + 48, 1);
 	}
 	else if (n < 10)
@@ -67,9 +67,9 @@ void	ft_putnbr(long long n)
 // Print an unsigned integer
 // Param:	Unsigned integer to print
 // Return:	Number of char printed
-void	ft_putnbr_uint(size_t n)
+void	ft_putnbr_uint(t_ull n)
 {
-	size_t	nbr;
+	t_ull	nbr;
 
 	if (n == 0)
 	{
@@ -80,7 +80,7 @@ void	ft_putnbr_uint(size_t n)
 	{
 		nbr = n % 10;
 		n = n / 10;
-		ft_putnbr(n);
+		ft_putnbr_ll(n);
 		ft_putchar_fd(nbr + 48, 1);
 	}
 	else if (n < 10)
@@ -88,9 +88,9 @@ void	ft_putnbr_uint(size_t n)
 }
 
 // NUMBER COUNT DIGIT
-size_t	nbr_count_digit(long long n)
+t_ull	nbr_count_digit(long long n)
 {
-	size_t	count;
+	t_ull	count;
 
 	count = 1;
 	if (n < 0)
@@ -111,9 +111,9 @@ size_t	nbr_count_digit(long long n)
 // Return:		The reversed string
 char	*revtab(char *tab)
 {
-	size_t		start;
-	size_t		end;
-	char		temp;
+	t_ull	start;
+	t_ull	end;
+	char	temp;
 
 	start = 0;
 	end = ft_strlen(tab) - 1;

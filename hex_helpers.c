@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:57:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/10/24 19:38:48 by lferro           ###   ########.fr       */
+/*   Updated: 2023/10/25 12:30:02 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // Get the nbr of digits of an hex number
 // Param:	Decimal number to get the number of digit
 // Return:	Number of digits of the number
-static int	get_hexnbr_len(size_t n)
+static int	get_hexnbr_len(t_ull n)
 {
 	int	count;
 
@@ -29,10 +29,10 @@ static int	get_hexnbr_len(size_t n)
 	return (count);
 }
 
-static char	*max_or_zero(size_t decnbr)
+static char	*max_or_zero(t_ull decnbr)
 {
 	if (decnbr == 0)
-		return ("0");
+		return (ft_strdup("0"));
 	else
 		return (ft_strdup("80000000"));
 }
@@ -41,14 +41,14 @@ static char	*max_or_zero(size_t decnbr)
 // Description:	Convert and print a decimal number into an hex and prints it.
 // Param:		Decimal number to convert.
 // Return:		Return the digits printed, without the \0.
-char	*dectohex_str(long long decnbr)
+char	*dectohex_str(unsigned int decnbr)
 {
-	size_t	index;
-	size_t	digit;
-	char	*nbrstr;
+	unsigned int	index;
+	unsigned int	digit;
+	char			*nbrstr;
 
 	index = 0;
-	if (decnbr == 0 || (long long)decnbr == -2147483648)
+	if (decnbr == 0 || (unsigned int)decnbr == (unsigned int)-2147483648)
 		return (max_or_zero(decnbr));
 	nbrstr = (char *)malloc((get_hexnbr_len(decnbr) + 1) * sizeof(char));
 	if (nbrstr == 0)
@@ -69,15 +69,15 @@ char	*dectohex_str(long long decnbr)
 
 // CONVERT DECIMAL NUMBER TO HEX NUMBER WITHOUT LEADING 0x
 // Used to print a ptr address
-char	*dectohex_sptr(size_t decnbr)
+char	*dectohex_sptr(t_ull decnbr)
 {
-	size_t	index;
-	size_t	digit;
+	t_ull	index;
+	t_ull	digit;
 	char	*nbrstr;
 
 	index = 0;
 	if (decnbr == 0)
-		return (ft_strdup("(nil)"));
+		return (ft_strdup("0x0"));
 	nbrstr = (char *)malloc((get_hexnbr_len(decnbr) + 3) * sizeof(char));
 	if (nbrstr == 0)
 		return (0);
@@ -98,14 +98,14 @@ char	*dectohex_sptr(size_t decnbr)
 }
 
 // CONVERT DECIMAL NUMBER TO HEX IN CAPITAL LETTERS
-char	*dectohex_scap(size_t decnbr)
+char	*dectohex_scap(unsigned int decnbr)
 {
-	size_t	index;
-	size_t	digit;
-	char	*nbrstr;
+	unsigned int	index;
+	unsigned int	digit;
+	char			*nbrstr;
 
 	index = 0;
-	if (decnbr == 0 || (long long)decnbr == -2147483648)
+	if (decnbr == 0 || (unsigned int)decnbr == (unsigned int)-2147483648)
 		return (max_or_zero(decnbr));
 	nbrstr = (char *)malloc((get_hexnbr_len(decnbr) + 1) * sizeof(char));
 	if (nbrstr == 0)

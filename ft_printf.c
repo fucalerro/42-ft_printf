@@ -6,16 +6,15 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 11:18:17 by lferro            #+#    #+#             */
-/*   Updated: 2023/10/24 19:52:07 by lferro           ###   ########.fr       */
+/*   Updated: 2023/10/25 12:09:05 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_printf.h"
 
-size_t	conv_printer_hex(size_t nbr, char const c)
+t_ull	conv_printer_hex(t_ull nbr, char const c)
 {
-	size_t	count;
+	t_ull	count;
 	char	*hexstr;
 
 	count = 0;
@@ -25,6 +24,8 @@ size_t	conv_printer_hex(size_t nbr, char const c)
 		hexstr = dectohex_str(nbr);
 	else if (c == 'X')
 		hexstr = dectohex_scap(nbr);
+	else
+		hexstr = 0;
 	count += print_str(hexstr);
 	free(hexstr);
 	return (count);
@@ -32,9 +33,9 @@ size_t	conv_printer_hex(size_t nbr, char const c)
 
 // Fn actually printing the characters
 // Return:	Number of characters printed
-size_t	conv_printer(char const c, va_list args)
+t_ull	conv_printer(char const c, va_list args)
 {
-	size_t	printed_chars;
+	t_ull	printed_chars;
 
 	printed_chars = 0;
 	if (c == 's')
@@ -46,7 +47,7 @@ size_t	conv_printer(char const c, va_list args)
 	else if (c == 'u')
 		printed_chars += print_uint(va_arg(args, unsigned int));
 	else if (c == 'p' || c == 'x' || c == 'X')
-		printed_chars += conv_printer_hex(va_arg(args, size_t), c);
+		printed_chars += conv_printer_hex(va_arg(args, t_ull), c);
 	else if (c == '%')
 		printed_chars += print_char('%');
 	return (printed_chars);
@@ -56,10 +57,10 @@ size_t	conv_printer(char const c, va_list args)
 // The one and only ft_printf
 int	ft_printf(const char *s, ...)
 {
-	va_list		args;
-	int			index;
-	int			i;
-	int			printed_chars;
+	va_list	args;
+	int		index;
+	int		i;
+	int		printed_chars;
 
 	index = -1;
 	i = 0;
@@ -84,18 +85,36 @@ int	ft_printf(const char *s, ...)
 
 // int main(void)
 // {
-// 	char c2 = '$';
-// 	int	nbr = 0x4a2;
-// 	int n2 = -1234;
-// 	char *str = "semaine";
-// 	int	*ptr = NULL;
+// 	char *s = NULL;
+// 	printf("%d\n", printf("%s\n", s));
+// 	printf("%d\n", ft_printf("%s\n", s));
+// 	return 0;
+// }
 
-// 	int lc =    printf("%%%d%%abc%%s%p%d%c%s%%%xabcs%X%%abcs%%%d\n", n2, &ptr, nbr, c2, str, n2, nbr, n2);
-// 	int ft = ft_printf("%%%d%%abc%%s%p%d%c%s%%%xabcs%X%%abcs%%%d\n", n2, &ptr, nbr, c2, str, n2, nbr, n2);
+// int main(void)
+// {
+// 	// char c2 = '$';
+// 	int	nbr = 0x4a2;
+// 	int n2 = -8757;
+// 	char *str = "semaine";
+// 	// int	*ptr = Nt_ull;
+
+// 	int lc =    printf("%p  %x %X\n", &str, nbr, n2);
+// 	int ft = ft_printf("%p  %x %X\n", &str, nbr, n2);
+
+// 	// int lc =    printf("%%%d%%abc%%s%d%c%s%% %p
+//%x   abcs%X%%abcs%%%d\n", n2, nbr, c2, str,&n2,  n2,  nbr, n2);
+// 	// int ft = ft_printf("%%%d%%abc%%s%d%c%s%% %p
+//%x   abcs%X%%abcs%%%d\n", n2, nbr, c2, str,&n2,  n2,  nbr, n2);
+
+// 	// int lc =    printf("%%%d%%abc%% %x s%p%d%c%s%%
+// \n", n2, nbr, &str ,nbr, c2, str);
+// 	// int ft = ft_printf("%%%d%%abc%% %x s%p%d%c%s%%
+// \n", n2, nbr, &str ,nbr, c2, str);
 
 // 	printf("libc:	%d\nft:	%d\n", lc, ft);
 
 // 	// ft_putnbr_fd(0x123, 1);
 
-// 	return 0;
+// 	return (0);
 // }
